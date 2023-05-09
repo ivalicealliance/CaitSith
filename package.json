@@ -1,0 +1,19 @@
+{
+  "name": "caitsith",
+  "version": "1.0.0",
+  "description": "A greeter bot for Discord",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "balthier-ex",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "discord.js": "^14.10.2",
+    "dotenv": "^16.0.3",
+    "node-fetch": "^3.3.1"
+  }
+}
