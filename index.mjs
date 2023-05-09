@@ -13,7 +13,7 @@ client.once('ready', () => {
 
 async function fetchWelcomeMessage() {
   try {
-    const response = await fetch(process.env.WELCOME_MESSAGE_URL);
+    const response = await fetch(process.env.CS_WELCOME_MESSAGE_URL);
     const text = await response.text();
     return text;
   } catch (error) {
@@ -37,4 +37,4 @@ client.on('guildMemberAdd', async (member) => {
   }
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.CS_DISCORD_TOKEN);
