@@ -1,14 +1,18 @@
 steps:
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo "Reading secrets from Secret Manager..."
-    CS_DISCORD_TOKEN=$(gcloud secrets versions access latest --secret=CS_DISCORD_TOKEN)
-    CS_WELCOME_MESSAGE_URL=$(gcloud secrets versions access latest --secret=CS_WELCOME_MESSAGE_URL)
-    echo "Replacing placeholders in app.yaml..."
-    sed -i "s|CS_DISCORD_TOKEN_PLACEHOLDER|$CS_DISCORD_TOKEN|g" app.yaml
-    sed -i "s|CS_WELCOME_MESSAGE_URL_PLACEHOLDER|$CS_WELCOME_MESSAGE_URL|g" app.yaml
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy']
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - '-c'
+      - >
+        echo "Reading secrets from Secret Manager and replacing placeholders in
+        app.yaml..."
+
+        sed -i "s|CS_DISCORD_TOKEN_PLACEHOLDER|$(gcloud secrets versions access
+        latest --secret=CS_DISCORD_TOKEN)|g" app.yaml
+
+        sed -i "s|CS_WELCOME_MESSAGE_URL_PLACEHOLDER|$(gcloud secrets versions
+        access latest --secret=CS_WELCOME_MESSAGE_URL)|g" app.yaml
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - app
+      - deploy
