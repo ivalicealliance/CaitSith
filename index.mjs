@@ -7,7 +7,7 @@ dotenv.config();
 const { Client, GatewayIntentBits } = pkg;
 const client = new Client({ intents: [pkg.GatewayIntentBits.Guilds, pkg.GatewayIntentBits.GuildMembers] });
 
-client.once('ready', () => {
+client.once('clientReady', () => {
   console.log('Bot is ready!');
 });
 
